@@ -1,3 +1,3 @@
 ---
 ===
-这是xiaoplus微告白项目
+xiaoplus微告白项目
