@@ -7,6 +7,13 @@ class Index extends CI_Controller {
 	}
 
 	public function index(){
-		$this->load->view('index');
+		$this->load->view('./common/header');
+		$this->load->view('./index/index');
+	}
+
+	public function notify(){
+		$this->load->Model("Notify_Model");
+		$result = $this->Notify_Model->get_notify(1);
+		var_dump($result);
 	}
 }

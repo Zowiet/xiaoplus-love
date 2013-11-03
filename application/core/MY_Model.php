@@ -7,7 +7,7 @@ class MY_Model extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 	}
-	
+
 	//=======================================
 	protected function result_array() {
 		//function to return the result array
@@ -16,7 +16,9 @@ class MY_Model extends CI_Model {
 	}
 	
 	protected function insert($params) {
-		return $this->db->insert($this->table, $params);
+		$result['status'] = $this->db->insert($this->table, $params);
+		$result['affected_row'] = $this->db->insert_id();
+		return $result;
 	}
 	
 	protected function update($params) {
@@ -26,7 +28,7 @@ class MY_Model extends CI_Model {
 	protected function delete($params = FALSE) {
 		return $this->db->delete($this->table, $params);
 	}
-	
+
 	protected function result_single($return_object = FALSE) {
 		$query = $this->db->get($this->table);
 
@@ -36,9 +38,29 @@ class MY_Model extends CI_Model {
 			return $query->row_array();
 		}
 	}
+
+	protected function set($field, $value, $opt){
+		return $this->db->set($field, $value, $opt);
+	}
+
+	protected function where($data) {
+		return $this->db->where($data);
+	}
+
+	protected function select($names) {
+		return $this->db->select($names);
+	}
 	
 	protected function result_count() {
 		return $this->db->count_all_results($this->table);
+	}
+
+	protected function order_by($key, $order) {
+		return $this->db->order_by($key, $order);
+	}
+
+	protected function limit($number, $start = 0) {
+		return $this->db->limit($number, $start);
 	}
 	
 }
